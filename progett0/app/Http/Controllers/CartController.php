@@ -39,39 +39,39 @@ class CartController extends Controller
 
         return view('cart.index')->with('viewData',$viewData);
 
-     }
+    }
 
      //aggiornamento file di sessione con aggiunta prodotto
-     public function add(Request $request , $id){
+    public function add(Request $request , $id){
 
         //leggiamo i prodotti in sessione
         $productsInSession = $request->session()->get('products');
         
-        
+        $qta = $request->input('qta');
         //aggiorniamo le quantità per il prodotto di cui riceviamo id
-        $productsInSession[$id] = $request->input('qta');
+        $productsInSession[$id] = $qta;
         
         //aggiornamento della sessione
         $request ->session()->put('products',$productsInSession);
 
-        return redirect()->route('cart.index');
+        return redirect()->route('cart.confirm', ['id' => $id, 'qta' => $qta]);
 
-     }
+    }
 
      //delete all products
-     public function delete (Request $request){
+    public function delete (Request $request){
         
          $request->session()->forget('products');
          return back();
-     }
+    }
      //TODO eliminare solo un prodotto
-     public function deleteProduct (Request $request , $id){
+    public function deleteProduct (Request $request , $id){
     
          $request->session()->forget('products.' . $id);
         
-      return back();
+        return back();
 
-     }
+    }
 
      public function purchase(Request $request){
      
@@ -124,8 +124,6 @@ class CartController extends Controller
             $viewData['balance'] = "";
         }
         
-        
-
         //svuota file di sessione
         $request->session()->forget('products');
 
@@ -134,6 +132,19 @@ class CartController extends Controller
         $viewData['order'] = $order;
        
 
-        return view("cart.purchase")->with("viewData" , $viewData);}
+        return view("cart.purchase")->with("viewData" , $viewData);
+    }
+    public function confirm($id, $qta) {
+    
+        $viewData = [];
 
-     }
+        $product = Product::findOrFail($id);
+
+        $viewData["title"] = $product['name']. " - Online Store";
+        $viewData["subtitle"] = "Descrizione prodotto";
+        $viewData["product"] = $product;
+        $viewData["qta"] = $qta;
+        
+        return view('cart.confirm')->with("viewData",$viewData);
+    }
+}

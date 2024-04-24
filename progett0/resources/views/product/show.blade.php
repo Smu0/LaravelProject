@@ -12,10 +12,12 @@
         <div class="col-md-8">
             <div class="card-body">
 
-                <h5 class="card-text" style="text-align:left"><small class="text-muted"><b>Nome:</b> {{$viewData["product"]["name"]}}</small></p>
+                <h5 class="card-text" style="text-align:left"><small class="text-muted"><b>Nome:</b> {{$viewData["product"]["name"]}}</small></h5>
                 <p class="card-text" style="text-align:left"><small class="text-muted"><b>Prezzo:</b> {{$viewData["product"]["price"] }} €</small></p>
+                <p class="card-text" style="text-align:left"><small class="text-muted"><b>Specie:</b> {{$viewData["product"]["specie"] }}</small></p>
+                <p class="card-text" style="text-align:left"><small class="text-muted"><b>Ambiente:</b> {{$viewData["product"]["ambiente"] }}</small></p>
                 <p class="card-text"style="text-align:left"><small class="text-muted"><b>Descrizione:</b> {{$viewData["product"]["description"]}}</small></p>
-            
+
                 <p class="card-text">
                     <form method = "POST" action="{{route('cart.add', ['id' => $viewData['product']->getId()]) }}">
                         <div class="row"> <!-- una row che contiene due col-auto -->

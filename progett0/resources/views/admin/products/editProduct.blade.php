@@ -39,6 +39,35 @@
       <div class="row">
         <div class="col">
           <div class="mb-3 row">
+            <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Specie:</label>
+            <div class="col-lg-10 col-md-6 col-sm-12">
+              <input name="specie" value="{{$viewData['product']->getSpecie()}}" type="text" class="form-control">
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="mb-3 row">
+            <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Ambiente:</label>
+            <div class="col-lg-10 col-md-6 col-sm-12">
+              <select class="form-select" name = "ambiente" id = "ambiente">
+                <option value="caldo" 
+                  @if($viewData['product']->getAmbiente() == 'caldo')
+                    selected 
+                  @endif
+                >Caldo</option>
+                <option value="freddo"
+                  @if($viewData['product']->getAmbiente() == 'freddo')
+                    selected 
+                  @endif
+                >Freddo</option>
+            </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="mb-3 row">
             <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Image:</label>
             <div class="col-lg-10 col-md-6 col-sm-12">
               <input class="form-control" type="file" name="image">

@@ -24,6 +24,8 @@ class AdminProductController extends Controller
             "name" => "required|max:255",
             "description" => "required",
             "price" => "required|numeric|gt:0",
+            "specie" => "required",
+            "ambiente" => "required",
             "image" => "image",
         ]);
     
@@ -33,6 +35,8 @@ class AdminProductController extends Controller
     $product["name"] = $request->input('name');
     $product["description"] = $request->input('description');
     $product["price"] = $request->input('price');
+    $product['specie'] = $request->input('specie');
+    $product['ambiente'] = $request->input('ambiente');
     $product["image"] = "noImage.jpg";
 
     $product->save();
@@ -78,6 +82,8 @@ class AdminProductController extends Controller
             "name" => "required|max:255",
             "description" => "required",
             "price" => "required|numeric|gt:0",
+            "specie" => "required",
+            "ambiente" => "required",
             "image" => "image",
         ]);
     
@@ -88,6 +94,8 @@ class AdminProductController extends Controller
     $product->setDescription($request->input('description'));
     $product->setPrice($request->input('price'));
     $product->setAvailability($request->input('disabilita',1)); //se è checkato prende valore di disabilita, altrimenti 1
+    $product->setSpecie($request->input('specie'));
+    $product->setAmbiente($request->input('ambiente'));
     $product->save();
 
     if($request->hasFile('image'))

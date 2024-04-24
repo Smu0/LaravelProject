@@ -30,6 +30,12 @@ class Product extends Model
     public function getAvailability(){
         return $this->attributes['availability'];
     }
+    public function getSpecie(){
+        return $this->attributes['specie'];
+    }
+    public function getAmbiente(){
+        return $this->attributes['ambiente'];
+    }
     public function setId($id){
         $this->attributes["id"]=$id;
     }
@@ -51,13 +57,19 @@ class Product extends Model
     public function setAvailability($availability){
         $this->attributes["availability"] = $availability;
     }
-
+    public function setSpecie($specie){
+        $this->attributes['specie'] = $specie;
+    }
+    public function setAmbiente($ambiente){
+        $this->attributes['ambiente'] = $ambiente;
+    }
+    
     public static function calcTotal($productsDetail,$productsInSession){
-
+        
         $totale = 0;
-
+        
         foreach($productsDetail as $product){
-
+            
             //per ogni prodotto prendo prezzo e quantità dall'array nel file sessione
             $totale += $product->getPrice()*$productsInSession[$product->getId()];
         }

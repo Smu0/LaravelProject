@@ -48,7 +48,7 @@ Route::middleware('auth')->group(function(){
 
     Route::get('/cart','App\Http\Controllers\CartController@index')->name("cart.index");
     Route::post('/cart/add/{id}','App\Http\Controllers\CartController@add')->name('cart.add');
-    Route::get('/cart/confirm/{id}','App\Http\Controllers\CartController@confirm')->name('cart.confirm');
+    Route::get('/cart/confirm/{id}{qta}','App\Http\Controllers\CartController@confirm')->name('cart.confirm');
     Route::delete('/cart/delete','App\Http\Controllers\CartController@delete')->name("cart.delete");
     Route::delete('/cart/deleteProduct/{id}','App\Http\Controllers\CartController@deleteProduct')->name("cart.deleteProduct");
     Route::post('/cart/purchase', 'App\Http\Controllers\CartController@purchase')->name("cart.purchase");

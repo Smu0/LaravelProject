@@ -142,7 +142,7 @@ class CartController extends Controller
     
         $suggested = Product::where("specie",$product->getSpecie())->where("ambiente", $product->getAmiente())->limit(6)->get();
         if($suggested->count() != 6){
-            
+            $suggestedTotal = array_merge($suggested, Product::where("specie",$product->getSpecie())->limit(6)->get());
         }
 
         $viewData["title"] = $product['name']. " - Online Store";

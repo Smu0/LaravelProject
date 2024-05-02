@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!--@vite(['resources/js/suggestion.js']) -->
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
@@ -72,8 +72,24 @@
               {{$suggested->getName()}}
             </div>
             <div class="card-body">
-              <a href="{{route('products.show', ['id' => $suggested->getId()])}}">
+              <a href="{{route('product.show', ['id' => $suggested->getId()])}}">
                 <img src="{{asset('storage/'.$suggested->getImage())}}">
+              </a>
+            </div>
+          </div>
+        </div>
+        @endforeach
+      </div>
+      <div class="row">
+        @foreach($viewData['suggested2'] as $suggested2)
+        <div class="col-md-2">
+          <div class="card">
+            <div class="card-header">
+              {{$suggested2->getName()}}
+            </div>
+            <div class="card-body">
+              <a href="{{route('product.show', ['id' => $suggested2->getId()])}}">
+                <img src="{{asset('storage/'.$suggested2->getImage())}}">
               </a>
             </div>
           </div>

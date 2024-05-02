@@ -140,16 +140,15 @@ class CartController extends Controller
 
         $product = Product::findOrFail($id);
     
-        $suggested = Product::where("specie",$product->getSpecie())->where("ambiente", $product->getAmiente())->limit(6)->get();
-        if($suggested->count() != 6){
-            $suggestedTotal = array_merge($suggested, Product::where("specie",$product->getSpecie())->limit(6)->get());
-        }
+        $suggested = Product::where("specie",$product->getSpecie())->where("ambiente", $product->getAmbiente())->limit(6)->get();
+        $suggested2 = Product::where("specie",$product->getSpecie())->limit(6)->get();
 
         $viewData["title"] = $product['name']. " - Online Store";
         $viewData["subtitle"] = "Descrizione prodotto";
         $viewData["product"] = $product;
         $viewData["qta"] = $qta;
         $viewData["suggested"] = $suggested;
+        $viewData["suggested2"] = $suggested2;
         
         return view('cart.confirm')->with("viewData",$viewData);
     }

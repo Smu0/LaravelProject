@@ -8,8 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
 
-
-
     public static function validate(Request $request){
         $request -> validate([
             'total' => "required | numeric",

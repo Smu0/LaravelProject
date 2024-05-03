@@ -66,6 +66,11 @@ class User extends Authenticatable
         return $this->orders;
     }
 
+    public function cronologie(): HasOne{
+        return $this->hasOne(Cronologia::class);
+    }
+    
+
     /**
      * The attributes that should be cast.
      *

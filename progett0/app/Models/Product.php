@@ -82,5 +82,9 @@ class Product extends Model
     public function gerItems(){
         return $this->items;
     }
+
+    public function cronologie(): HasMany{
+        return $this->hasMany(Cronologia::class);
+    }
     
 }

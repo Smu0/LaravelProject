@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Models\Product;
+use App\Models\Cronologia;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -32,6 +34,11 @@ class ProductController extends Controller
         $viewData = [];
 
         $product = Product::findOrFail($id);
+
+        $cronologia = new Cronologia();
+        $cronologia->setUserId(Auth::user()->getId());
+        $cronologia->setProductId($id);
+        $cronologia->save();
 
         $viewData["title"] = $product['name']. " - Online Store";
         $viewData["subtitle"] = "Descrizione prodotto";

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
 use App\Models\Order;
 use App\Models\Item;
+use App\Models\Cronologia;
 use Illuminate\Support\Facades\Input;
 
 
@@ -31,11 +32,21 @@ class CartController extends Controller
             
         }
 
+        $lastViewedProducts = Cronologia::orderBy("id", "desc")->take(4)->get();
+
+        $suggested = array();
+
+        foreach($lastViewedProducts as $cronologia){
+            $suggested[] = Product::where("specie", $cronologia->getProduct()->getSpecie())->where("id","!=", $cronologia->getProduct()->getId())->limit(6)->get();
+        }
+
+
         $viewData['title'] = 'Carrello - online store';
         $viewData['subtitle'] = 'Prodotti nel carrello';
         $viewData['total'] = $total;
         $viewData['balanceUpdate'] = Auth::user()->getBalance() - $total;
         $viewData['products'] = $productsDetail;
+        $viewData['suggested'] = $suggested;
 
         return view('cart.index')->with('viewData',$viewData);
 

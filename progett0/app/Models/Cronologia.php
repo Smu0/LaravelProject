@@ -23,6 +23,9 @@ class Cronologia extends Model
     public function setUser($user){
         $this->user = $user;
     }
+    public function setUserId($user_id){
+        $this->attributes['user_id'] = $user_id;
+    }
 
     public function product(){
         return $this->belongsTo(Product::class);
@@ -31,7 +34,10 @@ class Cronologia extends Model
         return $this->product;
     }
     public function setProduct($product){
-        $this->orders = $product;
+        $this->product = $product;
+    }
+    public function setProductId($product_id){
+        $this->attributes['product_id'] = $product_id;
     }
 
     public function getUpdateAt(){

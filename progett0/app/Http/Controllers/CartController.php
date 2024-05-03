@@ -34,10 +34,13 @@ class CartController extends Controller
 
         $lastViewedProducts = Cronologia::orderBy("id", "desc")->take(4)->get();
 
-        $suggested = array();
+        $listOfSuggestedRows = array();
 
         foreach($lastViewedProducts as $cronologia){
-            $suggested[] = Product::where("specie", $cronologia->getProduct()->getSpecie())->where("id","!=", $cronologia->getProduct()->getId())->limit(6)->get();
+            $suggestedRowsByCronologia = Product::where("specie", $cronologia->getProduct()->getSpecie())->where("id","!=", $cronologia->getProduct()->getId())->limit(3)->get();
+            if(!CartController::check($listOfSuggestedRows, $suggestedRowsByCronologia)){
+                $listOfSuggestedRows[] = $suggestedRowsByCronologia;
+            }
         }
 
 
@@ -46,10 +49,25 @@ class CartController extends Controller
         $viewData['total'] = $total;
         $viewData['balanceUpdate'] = Auth::user()->getBalance() - $total;
         $viewData['products'] = $productsDetail;
-        $viewData['suggested'] = $suggested;
+        $viewData['suggested'] = $listOfSuggestedRows;
 
         return view('cart.index')->with('viewData',$viewData);
 
+    }
+
+    public function check($listOfSuggestedRows, $suggestedRowsByCronologia){
+        if($listOfSuggestedRows != null){
+            foreach($listOfSuggestedRows as $suggestedRows){
+                foreach($suggestedRows as $suggestedRow){
+                    foreach($suggestedRowsByCronologia as $row){
+                        if($suggestedRow->getId() == $row->getId()){
+                            $suggestedRowsByCronologia->pull($suggestedRowsByCronologia->search($row));
+                        }
+                    }
+                }
+            }
+        }
+        return false;
     }
 
      //aggiornamento file di sessione con aggiunta prodotto

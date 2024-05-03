@@ -65,23 +65,25 @@
 
    <footer>
       <div class="row">
-        @foreach($viewData['suggested'] as $suggested)
+        <h2>Correlati:</h2>
+      </div>
+      <div class="row">
+        @foreach($viewData['suggestedBySpecieAmbiente'] as $suggested1)
         <div class="col-md-2">
           <div class="card">
             <div class="card-header">
-              {{$suggested->getName()}}
+              {{$suggested1->getName()}}
             </div>
             <div class="card-body">
-              <a href="{{route('product.show', ['id' => $suggested->getId()])}}">
-                <img src="{{asset('storage/'.$suggested->getImage())}}">
+              <a href="{{route('product.show', ['id' => $suggested1->getId()])}}">
+                <img src="{{asset('storage/'.$suggested1->getImage())}}" class="img-fluid">
               </a>
             </div>
           </div>
         </div>
         @endforeach
-      </div>
-      <div class="row">
-        @foreach($viewData['suggested2'] as $suggested2)
+        @foreach($viewData['suggestedBySpecie'] as $suggested2)
+        @if(!$viewData['suggestedBySpecieAmbiente']->contains($suggested2))
         <div class="col-md-2">
           <div class="card">
             <div class="card-header">
@@ -89,11 +91,12 @@
             </div>
             <div class="card-body">
               <a href="{{route('product.show', ['id' => $suggested2->getId()])}}">
-                <img src="{{asset('storage/'.$suggested2->getImage())}}">
+                <img src="{{asset('storage/'.$suggested2->getImage())}}" class="img-fluid">
               </a>
             </div>
           </div>
         </div>
+        @endif
         @endforeach
       </div>
    </footer>

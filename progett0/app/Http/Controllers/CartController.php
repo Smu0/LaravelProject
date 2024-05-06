@@ -32,7 +32,10 @@ class CartController extends Controller
             
         }
 
-        $lastViewedProducts = Cronologia::orderBy("id", "desc")->take(4)->get();
+        $lastViewedProducts = Cronologia::orderBy("id", "desc")
+            ->where("user_id", Auth::user()->getId())
+            ->take(4)
+            ->get();
 
         $listOfSuggestedRows = array();
 

@@ -83,20 +83,18 @@
         </div>
         @endforeach
         @foreach($viewData['suggestedBySpecie'] as $suggested2)
-        @if(!$viewData['suggestedBySpecieAmbiente']->contains($suggested2))
-        <div class="col-md-2">
-          <div class="card">
-            <div class="card-header">
-              {{$suggested2->getName()}}
-            </div>
-            <div class="card-body">
-              <a href="{{route('product.show', ['id' => $suggested2->getId()])}}">
-                <img src="{{asset('storage/'.$suggested2->getImage())}}" class="img-fluid">
-              </a>
+          <div class="col-md-2">
+            <div class="card">
+              <div class="card-header">
+                {{$suggested2->getName()}}
+              </div>
+              <div class="card-body">
+                <a href="{{route('product.show', ['id' => $suggested2->getId()])}}">
+                  <img src="{{asset('storage/'.$suggested2->getImage())}}" class="img-fluid">
+                </a>
+              </div>
             </div>
           </div>
-        </div>
-        @endif
         @endforeach
       </div>
    </footer>

@@ -32,14 +32,15 @@ class ProductController extends Controller
     public function show($id) {
     
         $viewData = [];
-
         $product = Product::findOrFail($id);
 
-        $cronologia = new Cronologia();
-        $cronologia->setUserId(Auth::user()->getId());
-        $cronologia->setProductId($id);
-        $cronologia->save();
-
+        if(Auth::user()){
+            $cronologia = new Cronologia();
+            $cronologia->setUserId(Auth::user()->getId());
+            $cronologia->setProductId($id);
+            $cronologia->save();
+        }
+        
         $viewData["title"] = $product['name']. " - Online Store";
         $viewData["subtitle"] = "Descrizione prodotto";
         $viewData["product"] = $product;

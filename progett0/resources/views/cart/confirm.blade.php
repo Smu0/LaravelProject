@@ -24,6 +24,8 @@
         @csrf
         <button type = "submit" class="btn bg-primary text-white mb-2" style = "width: 100%">Vai al carrello</button>
     </form>
-
+    <a href="{{route('product.index')}}">
+        <button type = "submit" class="btn bg-primary text-white mb-2" style = "width: 100%">Torna ai prodotti</button>
+    </a>
 
 @endsection

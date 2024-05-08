@@ -65,7 +65,7 @@
 
    <footer>
       <div class="row">
-        <h2>Correlati:</h2>
+        <h2>Correlati alla tua scelta:</h2>
       </div>
       <div class="row">
         @foreach($viewData['suggestedBySpecieAmbiente'] as $suggested1)

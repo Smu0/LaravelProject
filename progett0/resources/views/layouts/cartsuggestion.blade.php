@@ -65,7 +65,7 @@
 
    <footer>
       <div class="row">
-        <h2>Suggeriti in base alle tue Ricerche:</h2>
+        <h2>Suggeriti in base alla tua cronologia:</h2>
       </div>
       <div class="row">
         @foreach($viewData['suggested'] as $suggestedByProduct)
